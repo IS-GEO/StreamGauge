@@ -1,2 +1,2 @@
-# stream_Gauge
+# StreamGauge
 To Do
