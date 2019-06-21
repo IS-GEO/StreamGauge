@@ -5,13 +5,12 @@
 // RX pin5 on ultrasound sensor for rs232 serial communication
 #include <math.h>
 #define RANGE D2
+#define NUM_SAMPLES 10
 
-unsigned long last_time = 0;
 unsigned long sleep_time = 60; // either sample once a min or sample once every 10m tells us how long we sleep for
 
-int success = 0;      // sensor status
-int sleep_enable = 1; //default to sleeping
 int serial_value = 0; // sensoring reading value
+int sleep_enable = 1; //default to sleeping
 
 FuelGauge fuel; // to monitor battery
 
@@ -33,10 +32,12 @@ void setup()
 void loop()
 {
     int j = 0;
+    int success = 0;      // sensor status
+
     float sensor_avg = 0;
     
     // take up to ten samples 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < NUM_SAMPLES; i++)
     {
         success = read_sensor();
         if (success)
